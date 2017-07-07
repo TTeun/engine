@@ -1,13 +1,16 @@
 #include "input.h"
+#include <iostream>
+
+using namespace std;
 
 Input::Input()
   : Keyboard()
 {
-
+  cout << "Input constructor\n";
 }
 
 Input::~Input(){
-
+  cout << "Input destructor\n";
 }
 
 void Input::poll_input(){

@@ -3,7 +3,6 @@
 
 #include "display/window/window.h"
 #include "input/input.h"
-#include "util/box/box.h"
 
 #include <memory>
 #include <SDL2/SDL.h>

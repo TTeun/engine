@@ -11,17 +11,27 @@ private:
   int m_y;
 
 public:
-  int &x();
-  int &y();
+  int x();
+  int y();
 
+  void set_x(int _x);
+  void set_y(int _y);
 };
 
-inline int &Point::x(){
+inline int Point::x(){
   return m_x;
 }
 
-inline int &Point::y(){
+inline int Point::y(){
   return m_y;
+}
+
+inline void Point::set_x(int _x){
+  m_x = _x;
+}
+
+inline void Point::set_y(int _y){
+  m_y = _y;
 }
 
 #endif

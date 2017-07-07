@@ -15,6 +15,10 @@ public:
   float r();
   float g();
   float b();
+
+  int int_r();
+  int int_g();
+  int int_b();
 };
 
 inline float Color::r(){
@@ -27,6 +31,18 @@ inline float Color::g(){
 
 inline float Color::b(){
   return m_b;
+}
+
+inline int Color::int_r(){
+  return static_cast<int>(255 * m_r);
+}
+
+inline int Color::int_g(){
+  return static_cast<int>(255 * m_g);
+}
+
+inline int Color::int_b(){
+  return static_cast<int>(255 * m_b);
 }
 
 #endif

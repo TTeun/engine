@@ -1,4 +1,6 @@
 #include "game.h"
+#include "util/color/color.h"
+
 #include <iostream>
 
 using namespace std;
