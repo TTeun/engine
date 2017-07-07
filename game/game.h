@@ -13,6 +13,7 @@ public:
   ~Game();
 
   void run();
+  bool init_game();
 
 private:
   std::unique_ptr<Window> window = nullptr;

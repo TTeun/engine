@@ -1,4 +1,5 @@
 #include "window.h"
+#include "../sprite/sprite.h"
 
 using namespace std;
 
