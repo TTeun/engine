@@ -1,7 +1,8 @@
 OBJS = main.cc \
 			 game/game.cc \
 			 game/display/window/window.cc \
-			 game/input/keyboard/keyboard.h
+			 game/input/keyboard/keyboard.cc \
+			 game/input/input.cc
 
 CC = g++
 

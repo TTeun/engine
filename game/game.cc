@@ -4,7 +4,8 @@
 using namespace std;
 
 Game::Game()
-  : window( new Window(1000, 800))
+  : window( new Window(1000, 800)),
+    input( new Input )
 {
   cout << "Game constructor\n";
 }
@@ -14,8 +15,11 @@ Game::~Game(){
 }
 
 void Game::run(){
-  // while (1){
+  while (input->is_running()){
     window->clear();
     window->render();
-  // }
+
+    input->poll_input();
+
+  }
 }

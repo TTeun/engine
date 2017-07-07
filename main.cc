@@ -6,7 +6,6 @@ using namespace std;
 
 int main(){
   unique_ptr<Game> game(new Game());
-  // game->run();
-  // game
+  game->run();
 
 }
