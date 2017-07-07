@@ -1,6 +1,7 @@
 OBJS = main.cc \
 			 game/game.cc \
 			 game/display/window/window.cc \
+			 game/display/sprite/sprite.cc \
 			 game/input/keyboard/keyboard.cc \
 			 game/input/input.cc \
 			 game/util/point/point.cc \
@@ -13,7 +14,7 @@ COMPILER_FLAGS = -std=c++14 -Wall
 
 LINKER_FLAGS = -lSDL2 -lSDL2_image
 
-OBJ_NAME = hell
+OBJ_NAME = a
 
 all : $(OBJS)
 	$(CC) $(OBJS) $(COMPILER_FLAGS) $(LINKER_FLAGS) -o $(OBJ_NAME)
