@@ -6,6 +6,10 @@ Input::Input()
 
 }
 
+Input::~Input(){
+
+}
+
 void Input::poll_input(){
     while( SDL_PollEvent( &event ) != 0 )
     {
@@ -17,6 +21,6 @@ void Input::poll_input(){
     }
 }
 
-bool Input::is_running(){
-  return running;
+bool Input::has_quit(){
+  return not running;
 }

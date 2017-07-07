@@ -6,9 +6,10 @@
 class Input : public Keyboard {
 public:
   Input();
+  ~Input();
 
   void poll_input();
-  bool is_running();
+  bool has_quit();
 
 private:
   bool running = true;

@@ -4,6 +4,7 @@
 #include <SDL2/SDL.h>
 #include <iostream>
 #include <memory>
+#include <string>
 
 struct sdl_deleter
 {
@@ -13,7 +14,7 @@ struct sdl_deleter
 
 class Window {
 public:
- Window(size_t width, size_t height);
+ Window(std::string title, size_t width, size_t height);
  ~Window();
 
  void clear();
@@ -23,7 +24,7 @@ public:
  SDL_Window *window();
 
 private:
-  bool init_window();
+  bool init_window(std::string title);
 
   size_t m_width;
   size_t m_height;

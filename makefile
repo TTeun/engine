@@ -2,7 +2,10 @@ OBJS = main.cc \
 			 game/game.cc \
 			 game/display/window/window.cc \
 			 game/input/keyboard/keyboard.cc \
-			 game/input/input.cc
+			 game/input/input.cc \
+			 game/util/point/point.cc \
+			 game/util/box/box.cc \
+			 game/util/color/color.cc
 
 CC = g++
 
