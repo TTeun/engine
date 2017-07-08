@@ -26,16 +26,17 @@ void Game::run()
 {
 
   Player *player = new Player(window->screen_renderer(), "assets/player/player.png");
+  player->set_input(input.get());
 
   while (not input->has_quit())
   {
+    input->poll_input();
 
     window->clear();
     player->render();
     window->render();
 
 
-    input->poll_input();
   }
 
 }

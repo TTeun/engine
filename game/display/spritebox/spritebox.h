@@ -15,12 +15,14 @@ public:
 
   void render_sprite(SDL_Rect *des_rect);
 
+protected:
+  size_t m_src_rect_index = 0;
+  rect_vec m_src_rects;
+
 private:
   std::unique_ptr<Sprite> m_sprite;
   SDL_Renderer *m_screen_renderer;
-  rect_vec m_src_rects;
 
-  size_t m_src_rect_index = 0;
 };
 
 #endif
