@@ -2,6 +2,7 @@ OBJS = main.cc \
 			 game/game.cc \
 			 game/display/window/window.cc \
 			 game/display/sprite/sprite.cc \
+			 game/display/spritebox/spritebox.cc \
 			 game/input/keyboard/keyboard.cc \
 			 game/input/input.cc \
 			 game/util/point/point.cc \

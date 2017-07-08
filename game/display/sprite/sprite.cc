@@ -42,10 +42,7 @@ void Sprite::load_texture(SDL_Surface *surface){
     cout << "Unable to convert to texture %s! SDL Error: " <<  SDL_GetError() << '\n';
     m_success = false;
   }
-  SDL_QueryTexture(m_texture.get(), NULL, NULL, &dest_rec.w, &dest_rec.h);
-
 }
-
 
 SDL_Texture *Sprite::texture(){
   return m_texture.get();
