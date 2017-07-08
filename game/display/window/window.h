@@ -5,12 +5,7 @@
 #include <iostream>
 #include <memory>
 #include <string>
-
-struct sdl_deleter
-{
-  void operator()(SDL_Window *p) const { SDL_DestroyWindow(p); }
-  void operator()(SDL_Renderer *p) const { SDL_DestroyRenderer(p); }
-};
+#include "../sdl_deleter.h"
 
 class Window {
 public:

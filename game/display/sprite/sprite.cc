@@ -17,23 +17,27 @@ Sprite::Sprite(char const * path)
     m_success  = false;
   }
 
-  m_texture = SDL_CreateTextureFromSurface( m_screen_renderer, temp_surface );
-  if (not m_texture){
+  m_texture = unique_ptr<SDL_Texture, sdl_deleter>(
+              SDL_CreateTextureFromSurface( m_screen_renderer, temp_surface ),
+              sdl_deleter()
+            );
+
+  if (not m_texture.get()){
     cout << "Unable to convert to texture %s! SDL Error: " <<  SDL_GetError() << '\n';
     m_success = false;
   }
 
   SDL_FreeSurface( temp_surface );
-  SDL_QueryTexture(m_texture, NULL, NULL, &dest_rec.w, &dest_rec.h);
+  SDL_QueryTexture(m_texture.get(), NULL, NULL, &dest_rec.w, &dest_rec.h);
 }
 
 Sprite::~Sprite(){
   cout << "Sprite destructor\n";
-  SDL_DestroyTexture( m_texture );
+  SDL_DestroyTexture( m_texture.get() );
 }
 
 SDL_Texture *Sprite::texture(){
-  return m_texture;
+  return m_texture.get();
 }
 
 bool Sprite::is_success(){

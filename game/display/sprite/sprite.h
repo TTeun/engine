@@ -2,6 +2,8 @@
 #define __SPRITE__H
 
 #include <SDL2/SDL.h>
+#include <memory>
+#include "../sdl_deleter.h"
 
 class Sprite {
 public:
@@ -14,7 +16,7 @@ public:
 
 private:
   SDL_Rect dest_rec;
-  SDL_Texture* m_texture = nullptr;
+  std::unique_ptr<SDL_Texture, sdl_deleter> m_texture = nullptr;
 
   bool m_success = true;
   static SDL_Renderer *m_screen_renderer; // Decl in sprite.cc

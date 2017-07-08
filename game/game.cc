@@ -55,4 +55,6 @@ void Game::run()
     input->poll_input();
   }
 
+  delete sprite;
+
 }
