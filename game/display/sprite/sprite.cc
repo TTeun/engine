@@ -17,7 +17,6 @@ Sprite::Sprite(char const * path)
 
 Sprite::~Sprite(){
   cout << "Sprite destructor\n";
-  SDL_DestroyTexture( m_texture.get() );
 }
 
 SDL_Surface *Sprite::load_surface(char const * path){
