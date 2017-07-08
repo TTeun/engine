@@ -22,7 +22,4 @@ private:
   bool running = true;
 };
 
-
-
-
 #endif
