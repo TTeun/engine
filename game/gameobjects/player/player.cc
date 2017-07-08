@@ -6,7 +6,7 @@
 using namespace std;
 
 Player::Player(SDL_Renderer *screen_renderer, char const * path)
-  : SpriteBox(screen_renderer, path), m_des_rect(new SDL_Rect{0,0,64,64})
+  : SpriteBox(screen_renderer, path), m_des_rect(new SDL_Rect{0, 0, 64, 64})
 {
   cout << "Player constructor\n";
   m_src_rects->clear();
@@ -18,8 +18,8 @@ Player::Player(SDL_Renderer *screen_renderer, char const * path)
   m_src_rects->push_back(unique_ptr<SDL_Rect>(new SDL_Rect{64, 32, 32, 32}));
 
   // Initialize RigidBody
-  x = 100;
-  y = 2000;
+  x = 100;  // x and y positions are 10 times the screen position
+  y = 6400;
   w = 64;
   h = 64;
   weight = 80;
@@ -31,6 +31,10 @@ Player::~Player(){
 
 void Player::set_input(Input *input){
   m_input = input;
+}
+
+void Player::set_level(Level *level){
+  m_level = level;
 }
 
 void Player::handle_input(){

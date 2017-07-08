@@ -25,14 +25,14 @@ bool Game::init_game(){
   return true;
 }
 
-void Game::run()
+void Game::run(char const * path)
 {
+  unique_ptr<Level> level(new Level(window->screen_renderer(), "assets/level/tile.png"));
+  level->read_level(path);
 
   unique_ptr<Player> player(new Player(window->screen_renderer(), "assets/player/player.png"));
   player->set_input(input.get());
-
-  unique_ptr<Level> level(new Level(window->screen_renderer(), "assets/level/tile.png"));
-  level->read_level("assets/levels/level3");
+  player->set_level(level.get());
 
   Transform::set_level_size(level->width(), level->height());
   cout << level->width() << '\n';

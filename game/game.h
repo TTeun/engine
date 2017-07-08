@@ -12,7 +12,7 @@ public:
   Game();
   ~Game();
 
-  void run();
+  void run(char const * path);
   bool init_game();
 
 private:

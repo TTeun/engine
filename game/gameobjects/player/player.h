@@ -3,6 +3,7 @@
 
 #include "../../display/spritebox/spritebox.h"
 #include "../../input/input.h"
+#include "../level/level.h"
 #include "../../physics/rigidbody/rigidbody.h"
 #include <memory>
 
@@ -12,6 +13,7 @@ public:
   ~Player();
 
   void set_input(Input *input);
+  void set_level(Level *level);
 
   void render();
   void update();
@@ -26,7 +28,7 @@ private:
     JUMPED,
     DOUBLE_JUMPED
   };
-  JUMP_STATE jump_state = JUMP_STATE::GROUNDED;
+  JUMP_STATE jump_state = JUMP_STATE::JUMPED;
 
   enum class PLAYER_DIR {
     CENTER,
@@ -35,6 +37,7 @@ private:
   };
   PLAYER_DIR player_dir = PLAYER_DIR::RIGHT;
   std::unique_ptr<SDL_Rect> m_des_rect;
+  Level *m_level;
 
   void handle_input();
 };
