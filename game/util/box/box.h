@@ -2,55 +2,61 @@
 #define __BOX__H
 
 #include "../point/point.h"
+#include <SDL2/SDL.h>
 
-class Box {
+class Box : public SDL_Rect{
 public:
   Box(Point &_bl, int _w, int _h);
+  Box(int _x, int _y, int _w, int _h);
   ~Box() = default;
 
 private:
-  Point m_bl;
-  int m_w;
-  int m_h;
 
 public:
-  Point bl();
-  Point br();
-  Point tl();
-  Point tr();
 
-  int w();
-  int h();
+  int get_x();
+  int get_y();
+  int get_w();
+  int get_h();
 
-  void set_bl(Point &_bl);
+  void set_x(int _x);
+  void set_y(int _y);
   void set_w(int _w);
   void set_h(int _h);
 };
 
 //////////// INLINES ////////////
 
-inline Point Box::bl(){
-  return m_bl;
+inline int Box::get_x(){
+  return x;
 }
 
-inline int Box::w(){
-  return m_w;
+inline int Box::get_y(){
+  return y;
 }
 
-inline int Box::h(){
-  return m_h;
+inline int Box::get_w(){
+  return w;
 }
 
-inline void Box::set_bl(Point &_bl){
-  m_bl = _bl;
+inline int Box::get_h(){
+  return h;
+}
+
+inline void Box::set_x(int _x){
+  x = _x;
+}
+
+inline void Box::set_y(int _y){
+  y = _y;
 }
 
 inline void Box::set_w(int _w){
-  m_w = _w;
+  w = _w;
 }
 
 inline void Box::set_h(int _h){
-  m_h = _h;
+  h = _h;
 }
 
 #endif
