@@ -14,6 +14,9 @@ public:
   void read_level(char const * path);
   void render();
 
+  size_t width();
+  size_t height();
+
 private:
   enum class TILE_TYPE {
     EMPTY,
@@ -25,5 +28,13 @@ private:
   SDL_Renderer *m_screen_renderer;
   SDL_Rect m_des_rect;
 };
+
+inline size_t Level::width(){
+  return 32 * m_level_width;
+}
+
+inline size_t Level::height(){
+  return 32 * m_level_height;
+}
 
 #endif

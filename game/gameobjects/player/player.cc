@@ -34,20 +34,21 @@ void Player::set_input(Input *input){
 }
 
 void Player::update(){
-  // if (m_input->right_pressed())
-  //   vx_tank += weight / 120.0f;
-  //
-  // if (m_input->left_pressed())
-  //   vx_tank -= weight / 120.0f;
-  //
-  // if (jump_state != JUMP_STATE::GROUNDED)
-  //   vy_tank += weight / 300.0f;
-  //
-  // if (abs(vx_tank) >= 1.0f)
-  //   x += vx_tank;
-  //
-  // if (abs(vy_tank) >= 1.0f)
-  //   y += vy_tank;
+  if (m_input->right_pressed())
+    vx += weight / 20.0f;
+
+  if (m_input->left_pressed())
+    vx -= weight / 20.0f;
+
+  if (jump_state != JUMP_STATE::GROUNDED)
+    vy += weight / 300.0f;
+
+  x += vx;
+  x = min(max(0, x), 10 * (Transform::level_w() - w));
+
+
+
+  // y += vy;
 
   player_dir = vx > 0  ? PLAYER_DIR::RIGHT  :
                vx < 0  ? PLAYER_DIR::LEFT   :
@@ -67,7 +68,7 @@ void Player::update(){
 
 void Player::render(){
   update();
-  m_des_rect->x = Transform::to_screen_x(x);
-  m_des_rect->y = Transform::to_screen_y(y + m_des_rect->h);
+  m_des_rect->x = Transform::to_screen_x(x / 10);
+  m_des_rect->y = Transform::to_screen_y(y / 10 + m_des_rect->h);
   render_sprite(m_des_rect.get());
 }

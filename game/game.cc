@@ -34,13 +34,16 @@ void Game::run()
   unique_ptr<Level> level(new Level(window->screen_renderer(), "assets/level/tile.png"));
   level->read_level("assets/levels/level3");
 
+  Transform::set_level_size(level->width(), level->height());
+  cout << level->width() << '\n';
+
   int w, h;
   while (not input->has_quit())
   {
     input->poll_input();
 
     SDL_GetWindowSize(window->window(), &w, &h);
-    Transform::set_size(w, h);
+    Transform::set_screen_size(w, h);
 
     window->clear();
 
