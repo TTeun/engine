@@ -3,10 +3,10 @@
 
 #include "../../display/spritebox/spritebox.h"
 #include "../../input/input.h"
-#include "../../util/box/box.h"
+#include "../../physics/rigidbody/rigidbody.h"
 #include <memory>
 
-class Player : public SpriteBox {
+class Player : public SpriteBox, public RigidBody {
 public:
   Player(SDL_Renderer *screen_renderer, char const * path);
   ~Player();
@@ -18,7 +18,7 @@ public:
 
 
 private:
-  std::unique_ptr<Box> m_des_box;
+  std::unique_ptr<RigidBody> m_rigid_body;
   Input *m_input;
 
   enum class JUMP_STATE {
@@ -26,7 +26,7 @@ private:
     JUMPED,
     DOUBLE_JUMPED
   };
-  JUMP_STATE jump_state = JUMP_STATE::JUMPED;
+  JUMP_STATE jump_state = JUMP_STATE::GROUNDED;
 
   enum class PLAYER_DIR {
     CENTER,

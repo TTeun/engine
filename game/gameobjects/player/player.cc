@@ -1,10 +1,11 @@
 #include "player.h"
 
 #include <iostream>
+#include <cmath>
 using namespace std;
 
 Player::Player(SDL_Renderer *screen_renderer, char const * path)
-  : SpriteBox(screen_renderer, path), m_des_box(new Box{100, 100, 64, 64})
+  : SpriteBox(screen_renderer, path)
 {
   cout << "Player constructor\n";
   m_src_rects->clear();
@@ -14,6 +15,13 @@ Player::Player(SDL_Renderer *screen_renderer, char const * path)
   m_src_rects->push_back(unique_ptr<SDL_Rect>(new SDL_Rect{0, 32, 32, 32}));
   m_src_rects->push_back(unique_ptr<SDL_Rect>(new SDL_Rect{32, 32, 32, 32}));
   m_src_rects->push_back(unique_ptr<SDL_Rect>(new SDL_Rect{64, 32, 32, 32}));
+
+  // Initialize RigidBody
+  x = 100;
+  y = 100;
+  w = 64;
+  h = 64;
+  weight = 80;
 }
 
 Player::~Player(){
@@ -25,12 +33,25 @@ void Player::set_input(Input *input){
 }
 
 void Player::update(){
-  if (m_input->up_pressed())
-    jump_state = JUMP_STATE::JUMPED;
-  else
-    jump_state = JUMP_STATE::GROUNDED;
+  // if (m_input->right_pressed())
+  //   vx_tank += weight / 120.0f;
+  //
+  // if (m_input->left_pressed())
+  //   vx_tank -= weight / 120.0f;
+  //
+  // if (jump_state != JUMP_STATE::GROUNDED)
+  //   vy_tank += weight / 300.0f;
+  //
+  // if (abs(vx_tank) >= 1.0f)
+  //   x += vx_tank;
+  //
+  // if (abs(vy_tank) >= 1.0f)
+  //   y += vy_tank;
 
-
+  player_dir = vx > 0  ? PLAYER_DIR::RIGHT  :
+               vx < 0  ? PLAYER_DIR::LEFT   :
+               vx == 0 ? PLAYER_DIR::CENTER :
+                         PLAYER_DIR::CENTER ;
 
   m_src_rect_index = player_dir == PLAYER_DIR::CENTER  ? 0 :
                      player_dir == PLAYER_DIR::RIGHT   ? 1 :
@@ -45,5 +66,5 @@ void Player::update(){
 
 void Player::render(){
   update();
-  render_sprite(static_cast<SDL_Rect*> (m_des_box.get()) );
+  render_sprite(static_cast<SDL_Rect*> (this) );
 }
