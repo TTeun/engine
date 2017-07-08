@@ -1,4 +1,6 @@
 #include "level.h"
+#include "../../display/transform/transform.h"
+
 #include <iostream>
 #include <string>
 #include <fstream>
@@ -10,10 +12,31 @@ Level::Level(SDL_Renderer *screen_renderer, char const * path)
   : SpriteBox(screen_renderer, path), m_tiles(new vector<TILE_TYPE>)
 {
   cout << "Level constructor\n";
+  m_des_rect.x = 0;
+  m_des_rect.y = 0;
+  m_des_rect.w = 32;
+  m_des_rect.h = 32;
+
+  m_src_rect_index = 0;
+  m_src_rects->clear();
+  m_src_rects->push_back(unique_ptr<SDL_Rect>(new SDL_Rect{32, 0, 32, 32}));
 }
 
 Level::~Level(){
   cout << "Level destructor\n";
+}
+
+void Level::render(){
+  size_t h = 0;
+  size_t w = 0;
+  for (size_t i = 0; i != m_tiles->size(); ++i)
+    if ((*m_tiles.get())[i] != TILE_TYPE::EMPTY){
+      w = i % m_level_width;
+      h = i / m_level_width + 1;
+      m_des_rect.x = Transform::to_screen_x(32 * w);
+      m_des_rect.y = Transform::to_screen_y(32 * h);
+      render_sprite(&m_des_rect);
+    }
 }
 
 void Level::read_level(char const * path)
@@ -42,7 +65,7 @@ void Level::read_level(char const * path)
       {
 
         (*m_tiles.get())[index] = line[i] == '.' ? TILE_TYPE::EMPTY :
-                                 line[i] == 'g' ? TILE_TYPE::TOP   :
+                                  line[i] == 't' ? TILE_TYPE::TOP   :
                                                   TILE_TYPE::EMPTY ;
 
         --index;

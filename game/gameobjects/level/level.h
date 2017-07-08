@@ -7,6 +7,7 @@
 #include "../../display/spritebox/spritebox.h"
 
 class Level : public SpriteBox {
+public:
   Level(SDL_Renderer *screen_renderer, char const * path);
   ~Level();
 
@@ -22,6 +23,7 @@ private:
   size_t m_level_width;
   std::unique_ptr<std::vector <TILE_TYPE>> m_tiles;
   SDL_Renderer *m_screen_renderer;
+  SDL_Rect m_des_rect;
 };
 
 #endif
