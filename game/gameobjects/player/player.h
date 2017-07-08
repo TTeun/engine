@@ -34,7 +34,7 @@ private:
     RIGHT
   };
   PLAYER_DIR player_dir = PLAYER_DIR::RIGHT;
-
+  std::unique_ptr<SDL_Rect> m_des_rect;
 };
 
 

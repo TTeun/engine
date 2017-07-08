@@ -31,7 +31,7 @@ void Game::run()
   unique_ptr<Player> player(new Player(window->screen_renderer(), "assets/player/player.png"));
   player->set_input(input.get());
 
-  unique_ptr<Level> level(new Level(window->screen_renderer(), "assets/level/grass.png"));
+  unique_ptr<Level> level(new Level(window->screen_renderer(), "assets/level/tile.png"));
   level->read_level("assets/levels/level3");
 
   int w, h;

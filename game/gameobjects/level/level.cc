@@ -19,7 +19,7 @@ Level::Level(SDL_Renderer *screen_renderer, char const * path)
 
   m_src_rect_index = 0;
   m_src_rects->clear();
-  m_src_rects->push_back(unique_ptr<SDL_Rect>(new SDL_Rect{32, 0, 32, 32}));
+  m_src_rects->push_back(unique_ptr<SDL_Rect>(new SDL_Rect{0, 0, 32, 32}));
 }
 
 Level::~Level(){

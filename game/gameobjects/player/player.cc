@@ -1,11 +1,12 @@
 #include "player.h"
+#include "../../display/transform/transform.h"
 
 #include <iostream>
 #include <cmath>
 using namespace std;
 
 Player::Player(SDL_Renderer *screen_renderer, char const * path)
-  : SpriteBox(screen_renderer, path)
+  : SpriteBox(screen_renderer, path), m_des_rect(new SDL_Rect{0,0,64,64})
 {
   cout << "Player constructor\n";
   m_src_rects->clear();
@@ -17,8 +18,8 @@ Player::Player(SDL_Renderer *screen_renderer, char const * path)
   m_src_rects->push_back(unique_ptr<SDL_Rect>(new SDL_Rect{64, 32, 32, 32}));
 
   // Initialize RigidBody
-  x = 100;
-  y = 100;
+  x = 0;
+  y = 0;
   w = 64;
   h = 64;
   weight = 80;
@@ -66,5 +67,7 @@ void Player::update(){
 
 void Player::render(){
   update();
-  render_sprite(static_cast<SDL_Rect*> (this) );
+  m_des_rect->x = Transform::to_screen_x(x);
+  m_des_rect->y = Transform::to_screen_y(y + m_des_rect->h);
+  render_sprite(m_des_rect.get());
 }
