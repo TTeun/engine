@@ -18,8 +18,8 @@ Player::Player(SDL_Renderer *screen_renderer, char const * path)
   m_src_rects->push_back(unique_ptr<SDL_Rect>(new SDL_Rect{64, 32, 32, 32}));
 
   // Initialize RigidBody
-  x = 0;
-  y = 0;
+  x = 100;
+  y = 2000;
   w = 64;
   h = 64;
   weight = 80;
@@ -33,22 +33,29 @@ void Player::set_input(Input *input){
   m_input = input;
 }
 
-void Player::update(){
+void Player::handle_input(){
   if (m_input->right_pressed())
-    vx += weight / 20.0f;
+    vx += weight / 20;
 
   if (m_input->left_pressed())
-    vx -= weight / 20.0f;
+    vx -= weight / 20;
 
-  if (jump_state != JUMP_STATE::GROUNDED)
-    vy += weight / 300.0f;
+  if (m_input->up_pressed()){
+    vy += weight / 20;
+    jump_state = JUMP_STATE::JUMPED;
+  }
+}
+
+void Player::update(){
+  handle_input();
+
+  if (jump_state == JUMP_STATE::JUMPED)
+    vy -= 1;
 
   x += vx;
   x = min(max(0, x), 10 * (Transform::level_w() - w));
 
-
-
-  // y += vy;
+  y += vy;
 
   player_dir = vx > 0  ? PLAYER_DIR::RIGHT  :
                vx < 0  ? PLAYER_DIR::LEFT   :
@@ -60,10 +67,9 @@ void Player::update(){
                      player_dir == PLAYER_DIR::LEFT    ? 2 :
                                                          0 ;
 
-  m_src_rect_index += jump_state == JUMP_STATE::GROUNDED       ? 0 :
-                      jump_state == JUMP_STATE::JUMPED         ? 3 :
-                      jump_state == JUMP_STATE::DOUBLE_JUMPED  ? 3 :
-                                                                 0 ;
+  m_src_rect_index += vy >= 0 ? 0 :
+                      vy <  0 ? 3 :
+                                0 ;
 }
 
 void Player::render(){
