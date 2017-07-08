@@ -10,15 +10,32 @@ Sprite::Sprite(char const * path)
 {
   cout << "Sprite constructor\n";
 
+  SDL_Surface *surface = load_surface(path);
+  load_texture(surface);
+  SDL_FreeSurface( surface );
+}
+
+Sprite::~Sprite(){
+  cout << "Sprite destructor\n";
+  SDL_DestroyTexture( m_texture.get() );
+}
+
+SDL_Surface *Sprite::load_surface(char const * path){
   SDL_Surface *temp_surface;
   temp_surface = IMG_Load( path );
-  if( temp_surface == NULL ){
+
+  if( temp_surface == NULL )
+  {
     cout << "Unable to load image %s! SDL Error: " <<  SDL_GetError() << '\n';
     m_success  = false;
   }
 
+  return temp_surface;
+}
+
+void Sprite::load_texture(SDL_Surface *surface){
   m_texture = unique_ptr<SDL_Texture, sdl_deleter>(
-              SDL_CreateTextureFromSurface( m_screen_renderer, temp_surface ),
+              SDL_CreateTextureFromSurface( m_screen_renderer, surface ),
               sdl_deleter()
             );
 
@@ -26,15 +43,10 @@ Sprite::Sprite(char const * path)
     cout << "Unable to convert to texture %s! SDL Error: " <<  SDL_GetError() << '\n';
     m_success = false;
   }
-
-  SDL_FreeSurface( temp_surface );
   SDL_QueryTexture(m_texture.get(), NULL, NULL, &dest_rec.w, &dest_rec.h);
+
 }
 
-Sprite::~Sprite(){
-  cout << "Sprite destructor\n";
-  SDL_DestroyTexture( m_texture.get() );
-}
 
 SDL_Texture *Sprite::texture(){
   return m_texture.get();
