@@ -15,6 +15,6 @@ SpriteBox::~SpriteBox(){
   cout << "SpriteBox destructor\n";
 }
 
-void SpriteBox::render(SDL_Rect *des_rect){
+void SpriteBox::render_sprite(SDL_Rect *des_rect){
   SDL_RenderCopy(m_screen_renderer, m_sprite->texture(), m_src_rects->at(m_src_rect_index).get(), des_rect);
 }

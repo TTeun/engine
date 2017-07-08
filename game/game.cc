@@ -1,5 +1,5 @@
 #include "game.h"
-#include "display/spritebox/spritebox.h"
+#include "gameobjects/player/player.h"
 
 #include <iostream>
 
@@ -24,19 +24,18 @@ bool Game::init_game(){
 
 void Game::run()
 {
-  SpriteBox *sprite_box = new SpriteBox(window->screen_renderer(), "assets/player/player.png");
-  SDL_Rect des_rect{100,100, 64, 64};
+
+  Player *player = new Player(window->screen_renderer(), "assets/player/player.png");
 
   while (not input->has_quit())
   {
 
     window->clear();
-    sprite_box->render(&des_rect);
+    player->render();
     window->render();
+
 
     input->poll_input();
   }
-
-  delete sprite_box;
 
 }

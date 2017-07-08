@@ -7,7 +7,8 @@ OBJS = main.cc \
 			 game/input/input.cc \
 			 game/util/point/point.cc \
 			 game/util/box/box.cc \
-			 game/util/color/color.cc
+			 game/util/color/color.cc \
+			 game/gameobjects/player/player.cc
 
 CC = g++
 

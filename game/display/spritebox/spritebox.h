@@ -13,7 +13,7 @@ public:
   SpriteBox(SDL_Renderer *screen_renderer, char const * path);
   ~SpriteBox();
 
-  void render(SDL_Rect *des_rect);
+  void render_sprite(SDL_Rect *des_rect);
 
 private:
   std::unique_ptr<Sprite> m_sprite;
